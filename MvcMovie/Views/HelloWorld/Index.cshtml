@@ -1,0 +1,23 @@
+﻿@*
+    * 180125 Dit is serverside comment: Deze gaat niet mee naar de client
+*@
+@{
+    //Gebruik maken van een zogenaamde associatieve array
+    ViewData["Title"] = "Index";
+}
+<!-- Dit is HTML-commentaar: Opgelet! Deze gaat mee naar de client! -->
+
+<h2>Index</h2>
+<p>Hallo GertJan (nu vanaf de View Template)</p>
+<div style="background-color:azure">
+    <!-- "ul" staat voor un*somtething* LIST  en de  "li" staat voor LIST ITEM-->
+    <ul>
+        @for (int i = 0; i < (int)ViewData["AantalKeer"]; i++)
+        {
+            <!-- Die " (Apenstaartje)Html.Raw(ViewData["Naam"]) " is de manier waarop de variabelen 
+                van buiten de html er toch in kunnen geaccessed worden. -->
+
+        <li>De naam is @Html.Raw(ViewData["Naam"]).</li>
+        }
+    </ul>
+</div>
