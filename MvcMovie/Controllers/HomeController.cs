@@ -12,7 +12,8 @@ namespace MvcMovie.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            //Console.Beep();
+            return RedirectToAction("Welcome", "HelloWorld");
         }
 
         public IActionResult About()
@@ -24,11 +25,11 @@ namespace MvcMovie.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Laurens Hofman";
 
             return View();
         }
-
+        
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
