@@ -18,7 +18,7 @@ namespace MvcMovie.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Informatie van de applicatie";
 
             return View();
         }
