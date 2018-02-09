@@ -13,7 +13,8 @@ namespace MvcMovie.Controllers
         public IActionResult Index()
         {
             //Console.Beep();
-            return RedirectToAction("Welcome", "HelloWorld");
+            //return RedirectToAction("Welcome", "HelloWorld");
+            return RedirectToAction("CalcAnderePagina", "HelloWorld");
         }
 
         public IActionResult About()

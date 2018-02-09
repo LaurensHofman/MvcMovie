@@ -1,0 +1,68 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+@using ClassLibraryMVCMovie;
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="stylesheet" href="~/css/MyCSS.css" />
+
+    <title>Dit is een andere pagina + COOKIES</title>
+</head>
+<body>
+    <h2>
+        Andere pagina
+    </h2> <hr />
+    Het resultaat van de bewerking is: @ViewData[MyConstants.SW_CalcAnderePagina_Resultaat];
+
+    <hr />
+
+    Teruggaan naar @Html.ActionLink("mijn HelloWorld", "Welcome", "HelloWorld") . <br />
+
+    @*180208 https://www.w3schools.com/howto/howto_css_three_columns.asp*@
+    <form asp-controller="HelloWorld" method="post">
+        <div id="idCookies">
+            <div class="column"> Inhoud cookie: <input class="button" type="text" id="txtCookiesContent" name="txtCookiesContent" /> </div>
+            <div class="column"></div>
+            <div class="column"></div>
+
+            <div class="row">
+                <div class="column">
+                    <input class="button" type="submit" value="Make cookie"
+                           id="btnMakeCookie" formaction="@Url.Action("MakeCookie", "HelloWorld")" />
+                </div>
+                <div class="column backcolor">
+                    <input class="button" type="submit" value="Check cookie"
+                           id="btnCheckCookie" formaction="@Url.Action("CheckCookie", "HelloWorld")" />
+                </div>
+                <div class="column">
+                    <input class="button" type="submit" value="Delete cookie"
+                           id="btnDeleteCookie" formaction="@Url.Action("DeleteCookie", "HelloWorld")" />
+                </div>
+            </div>
+
+            <textarea>
+            @{ 
+                if (ViewData["txaResultaat"] != null)
+                {
+                    @Html.Raw(ViewData["txaResultaat"].ToString());
+                }
+                else
+                {
+                    @Html.Raw("(Nog niets bepaald.)")
+                }
+
+            }
+        </textarea>
+
+        </div>
+    </form>
+    
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿body {
+}
+
+/*180208*/
+
+.column {
+    float: left;
+    width: 33.33%;
+    text-align:center;
+}
+
+.backcolor {
+    background-color:hotpink;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#idCookies{
+    background-color: blue;
+    color: green;
+    font-size:xx-large;
+}
+
+.button:hover {
+    transform: scale(4) rotate(900deg);
+}
+
+textarea{
+    width: 90%;
+    min-height: 120px;
+    align-content:center;
+}
+

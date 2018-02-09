@@ -1,78 +1,24 @@
 ﻿
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 
 @*180202*@
 
+@{ 
+    Layout = null;
+    string NewBackgroundColor = MyUtilities.convertColorToHex(MyUtilities.renderRandomColor());
+}
+
+@using ClassLibraryMVCMovie;
 <html>
 <head>
     <!-- meta data: "daarbijhordende data" -->
     <meta name="viewport" content="width=device-width" />
     <title>@DateTime.Now.ToLongTimeString() : Welcome to aaaaaaaaaaaaaaaaaaaaaaaaaa</title>
 
-    <script>
-        // **  (*) als commentaar die ni weg mag:   180201 https://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock
-
-        function startTime() {
-            var today = new Date();
-            var h = today.getHours();
-            var m = today.getMinutes();
-            var s = today.getSeconds();
-            m = checkTime(m);
-            s = checkTime(s);
-            document.getElementById('txt').innerHTML =
-                h + ":" + m + ":" + s;
-            var t = setTimeout(startTime, 500);
-        }
-
-        function checkTime(i) {
-            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
-            return i;
-        }
-
-        function telOp() {
-            var getal01 = parseInt(document.getElementById("txtGetal01").value);
-            var getal02 = parseInt(document.getElementById("txtGetal02").value);
-            var resultaat = getal01 + getal02;
-
-            if (isNaN(resultaat)) {
-                resultaat = "Gelieve enkel getallen in te vullen.";
-            }
-
-            document.getElementById("divResultaat").innerHTML = "" + resultaat;
-        }
-
-        function randomContent() {
-            var random = Math.floor((Math.random() * 5) + 1);
-
-            switch (random) {
-                case 1:
-                    document.getElementById("divRandomContent").innerHTML = document.getElementById("txtRNG01").value;
-                    break;
-                case 2:
-                    document.getElementById("divRandomContent").innerHTML = document.getElementById("txtRNG02").value;
-                    break;
-                case 3:
-                    document.getElementById("divRandomContent").innerHTML = document.getElementById("txtRNG03").value;
-                    break;
-                case 4:
-                    document.getElementById("divRandomContent").innerHTML = document.getElementById("txtRNG04").value;
-                    break;
-                case 5:
-                    document.getElementById("divRandomContent").innerHTML = document.getElementById("txtRNG05").value;
-                    break;
-                default:
-                    document.getElementById("divRandomContent").innerHTML = "Oops! RNG incorrect";
-                    break;
-            }
-        }
-    </script>
+    <script type="text/javascript" src="~/js/MyJavaScript.js"></script>
 
 </head>
-<body onload="startTime()" bgcolor="Pink">
+<body onload="startTime()" bgcolor="@NewBackgroundColor">
     <center> <h1> Helloooooooooooooooo Wooooooooooooorld!! </h1> </center>
     <hr />
 
@@ -95,7 +41,7 @@
             <tr>
                 <td>Getal 2:</td>
                 <td> <input type="text" value="@ViewData["Getal02"]" name="txtGetal02" id="txtGetal02" /> </td>
-                <td colspan="2">Dezelfde</td>
+                <td colspan="2">@NewBackgroundColor</td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align:center"><input type="button" value="Toon Resultaat" onclick="telOp()" />
@@ -106,7 +52,10 @@
                         @ViewData["Som"]
                     </div>
                 </td>
-                <td colspan="2"><input type="submit" value="Serverresultaat" formaction=@Url.Action("DoeBewerking", "HelloWorld") id="btnServerTest" /></td>
+                <td colspan="2">
+                    <input type="submit" value="Serverresultaat" formaction=@Url.Action("DoeBewerking", "HelloWorld") id="btnServerTest" />
+                    <input type="submit" value="Bewerking naar andere pagina" id="btnNaarAnderePagina" formaction="@Url.Action("CalcAnderePagina", "HelloWorld")" />
+                </td>
             </tr>
             <tr>
                 <td colspan="2">

@@ -5,21 +5,15 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ClassLibraryMVCMovie;
 
 // * 180125
+// 180208
 
 namespace MvcMovie.Controllers
 {
     public class HelloWorldController : Controller
     {
-
-        //public IActionResult Index(string naam = "GertJan", int aantalKeer = 9)
-        //{
-        //    ViewData["Naam"] = naam;
-        //    ViewData["AantalKeer"] = aantalKeer;
-        //    return View();
-        //}
-
         public IActionResult Index(int aantalKeer = 9)
         {
             ViewData["Naam"] = DBTest.GetDefaultLanguage();
@@ -66,14 +60,72 @@ namespace MvcMovie.Controllers
             return View("Welcome");
         }
 
-        //public string NaamEnAantal(string naam = "GertJan", int aantalKeer = 5)
-        //{
-        //    return $"Hallo {naam}! #{aantalKeer}";
-        //}
-        
-        //public string MijnSom(int getal1 = 20, int getal2 = 33)
-        //{
-        //    return $"De som van {getal1} + {getal2} is {(getal1 + getal2).ToString()}" ;
-        //}
+        public IActionResult CalcAnderePagina()
+        {
+            ViewData[MyConstants.SW_CalcAnderePagina_Resultaat] = "Nog niet gekend.";
+
+            string getal01 = "==",
+                getal02 = "===";
+            int intGetal01 = 458486463,
+                intGetal02 = 48836456;
+
+            try
+            {
+                getal01 = HttpContext.Request.Form["txtGetal01"].ToString();
+
+                try
+                {
+                    getal02 = HttpContext.Request.Form["txtGetal02"].ToString();
+
+                    try
+                    {
+                        intGetal01 = int.Parse(getal01);
+                        try
+                        {
+                            intGetal02 = int.Parse(getal02);
+                            ViewData[MyConstants.SW_CalcAnderePagina_Resultaat] = (intGetal01 + intGetal02).ToString();
+                        }
+                        catch (Exception)
+                        {
+                            ViewData[MyConstants.SW_CalcAnderePagina_Resultaat] = "Is niet berekenbaar [180208AA]";
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        ViewData[MyConstants.SW_CalcAnderePagina_Resultaat] = "Is niet berekenbaar [180208BB]";
+                    }
+                }
+                catch (Exception)
+                {
+                    ViewData[MyConstants.SW_CalcAnderePagina_Resultaat] = "Is niet berekenbaar [180208CC]";
+                }
+            }
+            catch (Exception)
+            {
+                ViewData[MyConstants.SW_CalcAnderePagina_Resultaat] = "Is niet berekenbaar [180208DD]";
+            }
+
+            return View();
+        }
+
+        public IActionResult MakeCookie()
+        {
+            //P (pre)    : De nodige waarden worden aangeleverd
+            //P (post)   : Het koekje is gemaakt
+            //G (gebruik): In view CalcAnderePagina
+
+            try
+            {
+                ViewData["Resultaat"] = HttpContext.Request.Form["txtCookiesContent"].ToString();
+                ViewData["txaResultaat"] = "Test";
+                Console.Beep();
+            }
+            catch (Exception)
+            {
+                ViewData["txaResultaat"] = "The cookie cannot be created yet.";
+            }
+
+            return View("CalcAnderePagina");
+        }
     }
 }
